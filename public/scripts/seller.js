@@ -1,19 +1,19 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const productForm = document.getElementById("product-form");
-    const productList = document.getElementById("product-list");
-    const topSales = document.getElementById("top-sales");
-    const recentSales = document.getElementById("recent-sales");
-    const productModal = document.getElementById("product-modal");
-    const overlay = document.getElementById("overlay");
-    const modalImg = document.getElementById("modal-img");
-    const modalTitle = document.getElementById("modal-title");
-    const modalPrice = document.getElementById("modal-price");
-    const modalQuantity = document.getElementById("modal-quantity");
-    const modalSold = document.getElementById("modal-sold");
-    const modalDescription = document.getElementById("modal-description");
-    const closeBtn = document.querySelector(".close");
-    const addToCartBtn = document.getElementById("add-to-cart");
-    const buyNowBtn = document.getElementById("buy-now");
+    const productForm = document.getElementById("seller-product-form");
+    const productList = document.getElementById("seller-product-list");
+    const topSales = document.getElementById("seller-top-sales");
+    const recentSales = document.getElementById("seller-recent-sales");
+    const productModal = document.getElementById("seller-product-modal");
+    const overlay = document.getElementById("seller-overlay");
+    const modalImg = document.getElementById("seller-modal-img");
+    const modalTitle = document.getElementById("seller-modal-title");
+    const modalPrice = document.getElementById("seller-modal-price");
+    const modalQuantity = document.getElementById("seller-modal-quantity");
+    const modalSold = document.getElementById("seller-modal-sold");
+    const modalDescription = document.getElementById("seller-modal-description");
+    const closeBtn = document.querySelector(".seller-close");
+    const addToCartBtn = document.getElementById("seller-add-to-cart");
+    const buyNowBtn = document.getElementById("seller-buy-now");
     const cartCount = document.getElementById("cart-count");
 
     let products = [];
@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
             description: "Low-maintenance succulent plant, ideal for beginners." 
         },
         { 
-            id: "t5", // New item for Top Sales
+            id: "t5",
             name: "Garden Gloves", 
             price: "$10", 
             image: "/public/images/sell-us/t5.jpg", 
@@ -112,7 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
             description: "A cute mini pot with a cactus, perfect for small spaces." 
         },
         { 
-            id: "r5", // New item for Recent Sales
+            id: "r5",
             name: "Garden Pruner", 
             price: "$14", 
             image: "/public/images/sell-us/r5.jpg", 
@@ -126,22 +126,22 @@ document.addEventListener("DOMContentLoaded", () => {
     // Function to create a product card
     function createProductCard(product) {
         const productDiv = document.createElement("div");
-        productDiv.classList.add("product");
+        productDiv.classList.add("seller-product");
         productDiv.innerHTML = `
             <img src="${product.image}" alt="${product.name}">
             <h3>${product.name}</h3>
             <p>Price: ${product.price}</p>
             <p>Quantity: ${product.quantity}</p>
             <p>Sold: ${product.sold}</p>
-            <button class="details-btn">View Details</button>
-            <button class="edit-btn">Edit</button>
-            <button class="delete-btn">Delete</button>
+            <button class="seller-details-btn">View Details</button>
+            <button class="seller-edit-btn">Edit</button>
+            <button class="seller-delete-btn">Delete</button>
         `;
 
         // Attach event listeners
-        productDiv.querySelector(".details-btn").addEventListener("click", () => showProductDetails(product));
-        productDiv.querySelector(".edit-btn").addEventListener("click", () => editProduct(product));
-        productDiv.querySelector(".delete-btn").addEventListener("click", () => deleteProduct(product));
+        productDiv.querySelector(".seller-details-btn").addEventListener("click", () => showProductDetails(product));
+        productDiv.querySelector(".seller-edit-btn").addEventListener("click", () => editProduct(product));
+        productDiv.querySelector(".seller-delete-btn").addEventListener("click", () => deleteProduct(product));
 
         return productDiv;
     }
@@ -159,7 +159,7 @@ document.addEventListener("DOMContentLoaded", () => {
         addToCartBtn.setAttribute('data-product-id', product.id);
         buyNowBtn.setAttribute('data-product-id', product.id);
 
-        // Show modal and overlay
+        // Show modal and overlay with z-index above header
         productModal.classList.add("active");
         overlay.classList.add("active");
     }
@@ -244,10 +244,10 @@ document.addEventListener("DOMContentLoaded", () => {
     productForm.addEventListener("submit", (e) => {
         e.preventDefault();
 
-        const name = document.getElementById("product-name").value;
-        const price = `$${document.getElementById("product-price").value}`;
-        const quantity = document.getElementById("product-quantity").value;
-        const imageFile = document.getElementById("product-image").files[0];
+        const name = document.getElementById("seller-product-name").value;
+        const price = `$${document.getElementById("seller-product-price").value}`;
+        const quantity = document.getElementById("seller-product-quantity").value;
+        const imageFile = document.getElementById("seller-product-image").files[0];
         const description = `This is a ${name}. It is a high-quality product perfect for your garden.`;
 
         if (name && price && quantity && imageFile) {

@@ -207,6 +207,7 @@ const products = [
         if (!sortMenu.contains(e.target) && !sortBtn.contains(e.target)) {
             sortMenu.classList.remove('active');
         }
+        
     });
   
     const backBtn = document.querySelector('.back-btn');
@@ -215,3 +216,14 @@ const products = [
         productDetail.classList.remove('active');
     });
   });
+  document.addEventListener('DOMContentLoaded', () => {
+    // Existing code...
+
+    // Home button navigation
+    const homeBtn = document.querySelector('.home-btn');
+    homeBtn.addEventListener('click', () => {
+        window.location.href = '/'; // Adjust this path to your main homepage URL
+    });
+
+    // Rest of the existing code...
+});
