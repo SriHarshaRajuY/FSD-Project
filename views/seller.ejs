@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gardenly - Product Listing</title>
+    <link rel="stylesheet" href="../public/styles/seller.css">
+</head>
+<body>
+    <%- include('partials/header') %>
+    <div class="container">
+        <form id="product-form">
+            <input type="text" id="product-name" placeholder="Product Name" required>
+            <input type="number" id="product-price" placeholder="Price ($)" required>
+            <input type="file" id="product-image" accept="image/*" required>
+            <input type="number" id="product-quantity" placeholder="Quantity" min="1" required>
+            <button type="submit">Post Product</button>
+        </form>
+    </div>
+
+    <div class="content-container">
+        <h2>Products for Sale</h2>
+        <div id="product-list" class="product-grid">
+            <!-- Products will be dynamically added here -->
+        </div>
+
+        <h2 class="section-title">🔥 Top Sales</h2>
+        <div id="top-sales" class="product-grid">
+            <!-- Top sales products will be dynamically added here -->
+        </div>
+
+        <h2 class="section-title">📦 Recent Sales</h2>
+        <div id="recent-sales" class="product-grid">
+            <!-- Recent sales products will be dynamically added here -->
+        </div>
+    </div>
+
+    <!-- Product Details Modal -->
+    <div id="product-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <img id="modal-img" src="/placeholder.svg" alt="Product Image">
+            <h2 id="modal-title"></h2>
+            <p id="modal-price"></p>
+            <p id="modal-quantity"></p>
+            <p id="modal-sold"></p>
+            <p id="modal-description"></p>
+            <div class="modal-buttons">
+                <button id="add-to-cart" class="cart-btn">Add to Cart</button>
+                <button id="buy-now" class="buy-btn">Sell Now</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay for modal background -->
+    <div id="overlay" class="overlay"></div>
+
+    <script src="../public/scripts/seller.js"></script>
+</body>
+<footer>
+    <%- include('partials/footer.ejs') %>
+</footer>
+</html>
