@@ -6,7 +6,9 @@ const newProducts = [
         image: "./public/images/new-products/p6.jpg",
         rating: 4.5,
         price: 10,
-        originalPrice: 14.50
+        originalPrice: 14.50,
+        description: "A beautiful low-maintenance plant that brings prosperity.",
+        inStock: true
     },
     {
         id: 2,
@@ -14,7 +16,9 @@ const newProducts = [
         image: "./public/images/new-products/p7.jpg",
         rating: 4.5,
         price: 10,
-        originalPrice: 14.50
+        originalPrice: 14.50,
+        description: "Durable plastic pot perfect for small plants.",
+        inStock: true
     },
     {
         id: 3,
@@ -22,7 +26,9 @@ const newProducts = [
         image: "./public/images/new-products/p5.jpg",
         rating: 4.5,
         price: 5,
-        originalPrice: 7.60
+        originalPrice: 7.60,
+        description: "High-quality seeds for growing fresh spinach.",
+        inStock: true
     },
     {
         id: 4,
@@ -30,7 +36,9 @@ const newProducts = [
         image: "./public/images/new-products/p1.jpg",
         rating: 4.5,
         price: 10,
-        originalPrice: 14.50
+        originalPrice: 14.50,
+        description: "Sharp tool for precise plant pruning.",
+        inStock: false
     },
     {
         id: 5,
@@ -38,7 +46,9 @@ const newProducts = [
         image: "./public/images/new-products/p3.jpg",
         rating: 4.5,
         price: 10,
-        originalPrice: 14.50
+        originalPrice: 14.50,
+        description: "Decorative pebbles for garden aesthetics.",
+        inStock: true
     },
     {
         id: 6,
@@ -46,7 +56,9 @@ const newProducts = [
         image: "./public/images/new-products/p4.jpg",
         rating: 4.5,
         price: 10,
-        originalPrice: 14.50
+        originalPrice: 14.50,
+        description: "Fragrant flowering tree for your garden.",
+        inStock: true
     },
     {
         id: 7,
@@ -54,7 +66,9 @@ const newProducts = [
         image: "./public/images/new-products/p2.jpg",
         rating: 4.5,
         price: 10,
-        originalPrice: 14.50
+        originalPrice: 14.50,
+        description: "Fungicide to protect plants from fungal diseases.",
+        inStock: true
     },
     {
         id: 8,
@@ -62,7 +76,9 @@ const newProducts = [
         image: "./public/images/new-products/p8.jpg",
         rating: 4.5,
         price: 10,
-        originalPrice: 14.50
+        originalPrice: 14.50,
+        description: "Natural growing medium for healthy plants.",
+        inStock: true
     }
 ];
 
@@ -108,27 +124,6 @@ var swiper = new Swiper(".home-slider", {
     loop: true,
 });
 
-/* About Section Slideshow */
-let slideIndex = 0;
-showSlides();
-
-function showSlides() {
-    let slides = document.getElementsByClassName("mySlides");
-    
-    for (let i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
-    }
-    
-    slideIndex++;
-    if (slideIndex > slides.length) {slideIndex = 1}
-    
-    if (slides.length > 0) {
-        slides[slideIndex-1].style.display = "block";
-    }
-    
-    setTimeout(showSlides, 3000);
-}
-
 // Function to create star rating HTML
 function createStarRating(rating) {
     const fullStars = Math.floor(rating);
@@ -145,7 +140,16 @@ function createStarRating(rating) {
     return starsHTML;
 }
 
-// Render new products
+// Helper function to create star rating for product detail
+function createStarRatingSVG(rating) {
+    return Array(5).fill('').map((_, index) => 
+        `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="${index < Math.floor(rating) ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="${index < Math.floor(rating) ? 'text-yellow-400' : 'text-gray-300'}">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+        </svg>`
+    ).join('');
+}
+
+// Render new products (unchanged)
 function renderNewProducts() {
     const newProductsContainer = document.querySelector('.product .box-container');
     if (newProductsContainer) {
@@ -174,7 +178,7 @@ function renderNewProducts() {
     }
 }
 
-// Render best products
+// Render best products (unchanged)
 function renderBestProducts() {
     const bestProductsContainer = document.querySelector('.sell .box-container');
     if (bestProductsContainer) {
@@ -196,7 +200,71 @@ function renderBestProducts() {
     }
 }
 
-// Handle product actions
+// Show product detail with quantity selector and dynamic price
+function showProductDetail(productId) {
+    const product = newProducts.find(p => p.id == productId);
+    const productDetail = document.getElementById('product-detail');
+    const detailContent = productDetail.querySelector('.detail-content');
+
+    detailContent.innerHTML = `
+        <div>
+            <img src="${product.image}" alt="${product.name}">
+        </div>
+        <div>
+            <h1>${product.name}</h1>
+            <div class="rating">
+                ${createStarRatingSVG(product.rating)}
+            </div>
+            <p class="price">$${product.price}</p>
+            <p class="description">${product.description}</p>
+            <button ${!product.inStock ? 'disabled' : ''}>
+                ${product.inStock ? 'Add to Cart' : 'Sold Out'}
+            </button>
+            ${product.inStock ? `
+                <button class="buy-now">
+                    Buy Now
+                </button>
+                <div class="quantity">
+                    <button class="decrement">-</button>
+                    <span class="quantity-value">1</span>
+                    <button class="increment">+</button>
+                </div>` : ''}
+        </div>
+    `;
+
+    if (product.inStock) {
+        const decrementBtn = detailContent.querySelector('.decrement');
+        const incrementBtn = detailContent.querySelector('.increment');
+        const quantityValue = detailContent.querySelector('.quantity-value');
+        const priceElement = detailContent.querySelector('.price');
+        let quantity = 1;
+
+        // Update quantity and price
+        const updateQuantityAndPrice = () => {
+            quantityValue.textContent = quantity;
+            priceElement.textContent = `$${product.price * quantity}`;
+            decrementBtn.disabled = quantity <= 1;
+        };
+
+        // Increment quantity
+        incrementBtn.addEventListener('click', () => {
+            quantity++;
+            updateQuantityAndPrice();
+        });
+
+        // Decrement quantity
+        decrementBtn.addEventListener('click', () => {
+            if (quantity > 1) {
+                quantity--;
+                updateQuantityAndPrice();
+            }
+        });
+    }
+
+    productDetail.classList.add('active');
+}
+
+// Handle product actions (unchanged)
 function handleProductAction(action, productId) {
     switch (action) {
         case 'favorite':
@@ -214,7 +282,7 @@ function handleProductAction(action, productId) {
     }
 }
 
-// Handle add to cart
+// Handle add to cart (unchanged)
 function handleAddToCart(productId, quantity) {
     console.log(`Added ${quantity} of product ${productId} to cart`);
 }
@@ -225,7 +293,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderNewProducts();
     renderBestProducts();
 
-    // Add event listeners
+    // Add event listeners (unchanged except for click event)
     document.querySelectorAll('.box').forEach(box => {
         // Handle quantity changes
         const quantityInput = box.querySelector('input[type="number"]');
@@ -248,7 +316,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 if (action) {
                     const productId = box.getAttribute('data-product-id');
-                    handleProductAction(action, productId);
+                    if (action === 'view') {
+                        showProductDetail(productId); // Show product detail on eye icon click
+                    } else {
+                        handleProductAction(action, productId);
+                    }
                 }
             });
         });
@@ -263,5 +335,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 handleAddToCart(productId, parseInt(quantity));
             });
         }
+
+        // Add click event to the entire box to show product detail
+        box.addEventListener('click', (e) => {
+            // Prevent triggering if clicking on icons or buttons
+            if (!e.target.closest('.icons') && !e.target.closest('.btn')) {
+                const productId = box.getAttribute('data-product-id');
+                showProductDetail(productId);
+            }
+        });
     });
+
+    // Back button functionality for product detail
+    const backBtn = document.querySelector('.back-btn');
+    const productDetail = document.getElementById('product-detail');
+    if (backBtn) {
+        backBtn.addEventListener('click', () => {
+            productDetail.classList.remove('active');
+        });
+    }
 });

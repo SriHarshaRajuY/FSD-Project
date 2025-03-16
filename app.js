@@ -32,6 +32,9 @@ app.get('/plants', (req, res) => {
 app.get('/pebbles', (req, res) => {
     res.render('pebbles'); // This will render indextest.ejs
 });
+app.get('/tools', (req, res) => {
+    res.render('tools'); // This will render indextest.ejs
+});
 
 app.get('/login', (req, res) => {
     res.render('login'); // This will render indextest.ejs

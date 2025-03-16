@@ -214,3 +214,15 @@ const products = [
         productDetail.classList.remove('active');
     });
   });
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    // Existing code...
+
+    // Home button navigation
+    const homeBtn = document.querySelector('.home-btn');
+    homeBtn.addEventListener('click', () => {
+        window.location.href = '/'; // Adjust this path to your main homepage URL
+    });
+
+    // Rest of the existing code...
+});

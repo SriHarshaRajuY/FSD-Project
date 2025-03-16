@@ -8,7 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const navLinks = {
-        home: document.querySelector('.nav-links a:first-child'),
+        home: document.getElementById('homeLink'), // New Home link
+        support: document.getElementById('supportLink'), // Renamed Home to Support
         knowledgeBase: document.getElementById('knowledgeBaseLink'),
         ticket: document.getElementById('submitTicketLink')
     };
@@ -197,6 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const articleContent = sections.article;
         articleContent.querySelector('.breadcrumb').innerHTML = `
             <a href="#" data-section="home">Home</a> > 
+            <a href="#" data-section="support">Support</a> > 
             <a href="#" data-section="knowledgeBase">Knowledge base</a> > 
             ${article.title}
         `;
@@ -217,6 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const articleListSection = sections.articleList;
         articleListSection.querySelector('.breadcrumb').innerHTML = `
             <a href="#" data-section="home">Home</a> > 
+            <a href="#" data-section="support">Support</a> > 
             <a href="#" data-section="knowledgeBase">Knowledge base</a> > 
             ${list.title}
         `;
@@ -237,6 +240,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Navigation event listeners
+    navLinks.home.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.location.href = '/'; // Navigate to main home page
+    });
+
+    navLinks.support.addEventListener('click', (e) => {
+        e.preventDefault();
+        showSection('home'); // "Support" section is now mapped to the original home section
+    });
+
     navLinks.knowledgeBase.addEventListener('click', (e) => {
         e.preventDefault();
         showSection('knowledgeBase');
@@ -245,11 +258,6 @@ document.addEventListener('DOMContentLoaded', () => {
     navLinks.ticket.addEventListener('click', (e) => {
         e.preventDefault();
         showSection('ticket');
-    });
-
-    navLinks.home.addEventListener('click', (e) => {
-        e.preventDefault();
-        showSection('home');
     });
 
     // Card click handlers
