@@ -28,7 +28,7 @@ body {
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 7rem;
     padding: 0 2rem;
-    position: relative; /* Added to contain the absolutely positioned home button */
+    position: relative;
 }
 
 .img {
@@ -50,7 +50,7 @@ body {
 
 form {
     width: 360px;
-    position: relative; /* Added to ensure form content stays in place */
+    position: relative;
 }
 
 .login-content img {
@@ -75,6 +75,10 @@ form {
 
 .input-div.one {
     margin-top: 0;
+}
+
+.input-div.role {
+    margin-top: 15px; /* Adjust spacing after Welcome/Register title */
 }
 
 .i {
@@ -134,7 +138,8 @@ form {
     color: #38d39f;
 }
 
-.input-div > div > input {
+.input-div > div > input,
+.input-div > div > select {
     position: absolute;
     left: 0;
     top: 0;
@@ -146,7 +151,20 @@ form {
     padding: 0.5rem 0.7rem;
     font-size: 1.2rem;
     color: #555;
-    font-family: 'poppins', sans-serif;
+    font-family: 'Poppins', sans-serif;
+    appearance: none; /* Remove default dropdown arrow */
+    -webkit-appearance: none; /* Safari support */
+    -moz-appearance: none; /* Firefox support */
+}
+
+.input-div > div > select {
+    cursor: pointer;
+}
+
+/* Custom dropdown arrow */
+.input-div > div > select {
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="%23999" d="M2 4l4 4 4-4z"/></svg>') no-repeat right 0.7rem center;
+    background-size: 12px;
 }
 
 .input-div.pass {
@@ -187,10 +205,9 @@ a:hover {
 .btn:hover {
     background-position: right;
 }
-
-/* Home button styling for top-right corner */
+/* Home button styling */
 .home-btn {
-    position: absolute;
+    position: fixed;
     top: 20px;
     right: 20px;
     text-decoration: none;
@@ -201,7 +218,7 @@ a:hover {
     transition: .3s;
     display: flex;
     align-items: center;
-    z-index: 10; /* Ensures it stays above other elements */
+    z-index: 10;
 }
 
 .home-btn i {
@@ -210,9 +227,8 @@ a:hover {
 
 .home-btn:hover {
     color: #38d39f;
-    background-color: rgba(56, 211, 159, 0.1); /* Slight background on hover */
+    background-color: rgba(56, 211, 159, 0.1);
 }
-
 @media screen and (max-width: 1050px) {
     .container {
         grid-gap: 5rem;
