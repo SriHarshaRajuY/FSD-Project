@@ -84,6 +84,14 @@ app.get('/maintenance', (req, res) => {
     res.render('blogs/maintenance'); // This will render indextest.ejs
 });
 
+app.get('/admindashboard', (req, res) => {
+    res.render('admindashboard'); // This will render indextest.ejs
+});
+
+app.get('/sellerdashboard', (req, res) => {
+    res.render('sellerdashboard'); // This will render indextest.ejs
+});
+
 // Start the server
 const PORT = 3000;
 app.listen(PORT, () => {
