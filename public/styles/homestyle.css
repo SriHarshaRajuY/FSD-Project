@@ -107,8 +107,8 @@ body.dark-theme .product .box-container .box h3 {
 .swiper-button-next,
 .swiper-button-prev {
     color: var(--primary);
-    width: 4rem;
-    height: 4rem;
+    width: 4.5rem;
+    height: 6rem;
     background: rgba(255, 255, 255, 0.8);
     border-radius: 50%;
     transition: all 0.3s ease;
@@ -171,7 +171,7 @@ body.dark-theme .product .box-container .box h3 {
 
 /* Product */
 .heading {
-  margin-top: 10%;
+  margin-top: 4%;
   font-size: 4rem;
   color: var(--green);
   text-align: center;
