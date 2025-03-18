@@ -12,6 +12,59 @@ body {
     display: flex;
     justify-content: center;
 }
+.navbar {
+    width: 100%;
+    background-color: rgb(251, 249, 249); /* Light gray background */
+    padding: 20px 40px; /* Adjust padding */
+    position: fixed; /* Fixed at the top */
+    top: 0;
+    left: 0;
+    color: black;
+    z-index: 1000; /* Ensure it stays above other content */
+    height: 80px;
+}
+
+.navbar-content {
+    display: flex;
+    justify-content: space-between; /* Push logo to the left and links to the right */
+    align-items: center;
+    max-width: 1200px; /* Adjust based on your layout */
+    margin: 0 auto; /* Center the content */
+    height: 100%; /* Take full height of the navbar */
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+    color: rgb(69, 201, 116); /* Green color for the logo */
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between icon and text (if any) */
+}
+
+.logo i {
+    font-size: 24px; /* Icon size */
+    color: #41B06E; /* Green color for the icon */
+}
+
+.nav-links {
+    display: flex;
+    gap: 40px; /* Increase gap between links */
+    align-items: center;
+}
+
+.nav-links a {
+    color: black; /* Default link color */
+    text-decoration: none;
+    font-size: 22px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #41B06E; /* Green color on hover */
+}
 
 /* Blog Section */
 .blog {
