@@ -14,15 +14,16 @@
             <img src="../public/images/login-register/bg.png">
         </div>
         <div class="login-content">
-            <form action="/login" method="POST" id="loginForm">
+            <form action="/login" id="loginForm" method="POST">
                 <a href="/" class="home-btn">
                     <i class="fas fa-home"></i> Home
                 </a>
                 <img src="../public/images/login-register/avatar.png">
                 <h2 class="title">Welcome</h2>
-                <% if (typeof error !== 'undefined') { %>
+                <% if (error) { %>
                     <p style="color: red;"><%= error %></p>
                 <% } %>
+                <!-- ejs used here -->
                 <div class="input-div role">
                     <div class="i">
                         <i class="fas fa-user-tag"></i>
@@ -30,7 +31,7 @@
                     <div class="div">
                         <h5>Role</h5>
                         <select class="input" name="role" id="role" required>
-                            <option value="">Select Role</option>
+                            <option value=""></option>
                             <option value="Buyer">Buyer</option>
                             <option value="Seller">Seller</option>
                             <option value="Admin">Admin</option>
@@ -47,16 +48,13 @@
                     </div>
                 </div>
                 <div class="input-div pass">
-                    <div class="i">
-                         <i class="fas fa-lock"></i>
+                    <div class="i"> 
+                        <i class="fas fa-lock"></i>
                     </div>
                     <div class="div">
                         <h5>Password</h5>
                         <input type="password" class="input" name="password" id="password" required>
                     </div>
-                </div>
-                <div class="forgot-password">
-                    <a href="#">Forgot Password?</a>
                 </div>
                 <input type="submit" class="btn" value="Login">
                 <a class="register-link" href="/register">Don't have an account? Register</a>
